@@ -1,4 +1,5 @@
-(load-file "packages.el")
+(load-file "~/.emacs.d/packages.el")
+(load-file "~/.emacs.d/org.el")
 
 (require 'evil)
 (require 'company)
@@ -40,7 +41,7 @@
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; limit line length to 120 chars
-(setq whitespace-line-column 120
+(setq whitespace-line-column 120)
 (setq whitespace-style '(face lines-tail))
 
 ;; modes
@@ -92,8 +93,6 @@
 (define-key evil-normal-state-map (kbd "C-c s") 'sbt-command)
 (define-key evil-normal-state-map (kbd "C-f") 'helm-ag-project-root)
 (define-key evil-visual-state-map (kbd "C-f") 'helm-ag-project-root)
-
-(load-file "org.el")
 
 (defvar my-leader-map (make-sparse-keymap)
   "Keymap for \"leader key\" shortcuts.")
