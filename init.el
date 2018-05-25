@@ -37,7 +37,6 @@
 
 ;; buffer local variables
 (setq-default
- show-trailing-whitespace t
  indent-tabs-mode nil
  tab-width 8
  compile-command "make"
@@ -52,7 +51,7 @@
 
 ;; Hooks for modes
 (add-hook 'haskell-mode-hook 'intero-mode)
-(add-hook 'prog-mode-hook '(setq-default show-trailing-whitespace t))
+(add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
 (add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; global keybindings
