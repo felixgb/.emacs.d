@@ -14,6 +14,10 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(use-package evil
+  :ensure t
+  :pin melpa-stable)
+
 (use-package expand-region
   :ensure t
   :pin melpa-stable)
