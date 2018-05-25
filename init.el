@@ -10,19 +10,19 @@
 (load-theme 'tango-dark)
 (set-frame-font "xos4 Terminus 12" nil t)
 
-;; disable bad stuff
+;; disable stuff
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (toggle-scroll-bar -1)
 
 ;; global variables
 (setq
+ use-package-always-ensure t
  ensime-startup-notification nil
  create-lockfiles nil
  make-backup-files nil
  scroll-error-top-bottom t
  show-paren-delay 0.5
- use-package-always-ensure t
 
  ;; helm ag
  grep-find-ignored-directories '("target")
@@ -85,8 +85,9 @@
 (define-key evil-insert-state-map (kbd "C-x C-f") 'company-files)
 (define-key evil-insert-state-map (kbd "C-x C-l") 'evil-complete-next-line)
 
-;; search through open buffers
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
+
+;; search through open buffers
 (define-key evil-normal-state-map (kbd "M-p") 'helm-buffer-list)
 
 (define-key evil-normal-state-map (kbd "C-c i") 'ensime-import-type-at-point)
