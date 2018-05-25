@@ -24,6 +24,14 @@
  show-paren-delay 0.5
  use-package-always-ensure t
 
+ ;; helm ag
+ grep-find-ignored-directories '("target")
+ helm-ag-use-grep-ignore-list t
+
+ ;; limit line length to 120 chars
+ whitespace-line-column 120
+ whitespace-style '(face lines-tail)
+
  company-auto-complete 'company-explicit-action-p
  company-tooltip-align-annotations t)
 
@@ -35,15 +43,6 @@
  compile-command "make"
  c-basic-offset 2)
 
-;; Hooks for modes
-(add-hook 'haskell-mode-hook 'intero-mode)
-(add-hook 'prog-mode-hook '(setq-default show-trailing-whitespace t))
-(add-hook 'prog-mode-hook 'whitespace-mode)
-
-;; limit line length to 120 chars
-(setq whitespace-line-column 120)
-(setq whitespace-style '(face lines-tail))
-
 ;; modes
 (evil-mode t)
 (electric-indent-mode 1)
@@ -51,10 +50,10 @@
 (helm-projectile-on)
 (company-mode t)
 
-;; helm ag custom stuff
-(setq
- grep-find-ignored-directories '("target")
- helm-ag-use-grep-ignore-list t)
+;; Hooks for modes
+(add-hook 'haskell-mode-hook 'intero-mode)
+(add-hook 'prog-mode-hook '(setq-default show-trailing-whitespace t))
+(add-hook 'prog-mode-hook 'whitespace-mode)
 
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
@@ -72,6 +71,7 @@
 (evil-define-key 'normal scala-mode-map
     (kbd "C-]") 'ensime-edit-definition)
 
+;; C-l clear sbt shell
 (evil-define-key 'normal sbt-mode-map
     (kbd "C-l") 'comint-clear-buffer)
 
@@ -97,10 +97,6 @@
 (defvar my-leader-map (make-sparse-keymap)
   "Keymap for \"leader key\" shortcuts.")
 (define-key evil-normal-state-map (kbd "SPC") my-leader-map)
-
-(define-key my-leader-map "u" 'dumb-jump-quick-look)
-(define-key my-leader-map "l" 'dumb-jump-go)
-(define-key my-leader-map "b" 'dumb-jump-back)
 
 (define-key my-leader-map "f" 'helm-ag-project-root)
 (define-key my-leader-map "p" 'helm-projectile-find-file)
