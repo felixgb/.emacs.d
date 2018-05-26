@@ -38,6 +38,7 @@
   :ensure t
   :pin melpa)
 
+;; haskell
 (use-package haskell-mode
   :ensure t
   :bind (("C-i" . haskell-mode-jump-to-def))
@@ -46,6 +47,23 @@
 (use-package intero
   :ensure t
   :pin melpa-stable)
+
+;; rust
+(use-package rust-mode
+  :ensure t
+  :pin melpa-stable)
+
+(use-package racer
+  :ensure t
+  :pin melpa-stable)
+
+(use-package cargo
+  :ensure t
+  :pin melpa-stable)
+
+(use-package flycheck-rust
+  :ensure t
+  :pin melpa)
 
 (use-package markdown-mode
   :ensure t

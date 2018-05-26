@@ -33,7 +33,10 @@
  whitespace-style '(face lines-tail)
 
  company-auto-complete 'company-explicit-action-p
- company-tooltip-align-annotations t)
+ company-tooltip-align-annotations t
+
+ racer-cmd "~/.cargo/bin/racer"
+ racer-rust-src-path "~/.local/src/rust/src")
 
 ;; buffer local variables
 (setq-default
@@ -51,8 +54,14 @@
 
 ;; Hooks for modes
 (add-hook 'haskell-mode-hook 'intero-mode)
-(add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
+; (add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
 (add-hook 'prog-mode-hook 'whitespace-mode)
+
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'rust-mode-hook 'cargo-minor-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
 
 ;; global keybindings
 (global-unset-key (kbd "C-z"))
