@@ -13,6 +13,10 @@
 ;; theme and fonts
 (set-frame-font "xos4 Terminus 12" nil t)
 
+(custom-set-faces
+ '(whitespace-line ((t (:background "black" :foreground "firebrick"))))
+ '(whitespace-trailing ((t (:foreground "firebrick" :underline t)))))
+
 ;; disable stuff
 (menu-bar-mode -1)
 (tool-bar-mode -1)
@@ -64,13 +68,11 @@
 (helm-projectile-on)
 (company-mode t)
 
-(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
-; (add-hook 'git-commit-mode-hook 'evil-mode)
-
 ;; Hooks for modes
 (add-hook 'haskell-mode-hook 'intero-mode)
-; (add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
-; (add-hook 'prog-mode-hook 'whitespace-mode)
+(add-hook 'prog-mode-hook 'whitespace-mode)
+
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
@@ -127,7 +129,9 @@
 
 (define-key evil-normal-state-map (kbd "C-c f") 'projectile-dired)
 
-(define-key my-leader-map "m" 'make)
+(define-key evil-normal-state-map (kbd "C-c d") 'diff-hl-diff-goto-hunk)
+(define-key evil-normal-state-map (kbd "M-n") 'diff-hl-next-hunk)
+(define-key evil-normal-state-map (kbd "M-p") 'diff-hl-previous-hunk)
 
 (define-key evil-normal-state-map (kbd "C-c =")
   (lambda () (interactive)
