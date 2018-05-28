@@ -7,6 +7,8 @@
 (require 'whitespace)
 (require 'expand-region)
 (require 'evil-magit)
+(require 'ensime)
+(require 'ensime-expand-region)
 
 ;; theme and fonts
 (set-frame-font "xos4 Terminus 12" nil t)
@@ -115,27 +117,15 @@
 (define-key evil-normal-state-map (kbd "C-c C-v") 'magit-status)
 
 ;; search through open buffers
-(define-key evil-normal-state-map (kbd "M-p") 'helm-buffer-list)
+(define-key evil-normal-state-map (kbd "C-c b") 'helm-mini)
 
 (define-key evil-normal-state-map (kbd "C-c i") 'ensime-import-type-at-point)
 (define-key evil-normal-state-map (kbd "C-c s") 'sbt-command)
+(define-key evil-normal-state-map (kbd "C-c C-c s") 'sbt-run-previous-command)
 (define-key evil-normal-state-map (kbd "C-f") 'helm-ag-project-root)
 (define-key evil-visual-state-map (kbd "C-f") 'helm-ag-project-root)
 
-(defvar my-leader-map (make-sparse-keymap)
-  "Keymap for \"leader key\" shortcuts.")
-(define-key evil-normal-state-map (kbd "SPC") my-leader-map)
-
-(define-key my-leader-map "f" 'helm-ag-project-root)
-(define-key my-leader-map "p" 'helm-projectile-find-file)
-(define-key my-leader-map "x" 'helm-projectile-switch-project)
-(define-key my-leader-map "r" 'projectile-dired)
-(define-key my-leader-map "g" 'helm-google-suggest)
-
-(define-key my-leader-map "s" 'projectile-toggle-between-implementation-and-test)
-
-(define-key my-leader-map "a" 'org-agenda)
-(define-key my-leader-map "c" 'org-capture)
+(define-key evil-normal-state-map (kbd "C-c f") 'projectile-dired)
 
 (define-key my-leader-map "m" 'make)
 
