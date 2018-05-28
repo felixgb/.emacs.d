@@ -40,6 +40,10 @@
 
 (use-package magit
   :ensure t
+  :pin melpa)
+
+(use-package evil-magit
+  :ensure t
   :pin melpa-stable)
 
 (use-package diff-hl

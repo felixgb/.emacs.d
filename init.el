@@ -6,6 +6,7 @@
 (require 'company)
 (require 'whitespace)
 (require 'expand-region)
+(require 'evil-magit)
 
 ;; theme and fonts
 (set-frame-font "xos4 Terminus 12" nil t)
@@ -59,6 +60,7 @@
 (company-mode t)
 
 (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+; (add-hook 'git-commit-mode-hook 'evil-mode)
 
 ;; Hooks for modes
 (add-hook 'haskell-mode-hook 'intero-mode)
