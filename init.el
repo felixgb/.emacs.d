@@ -2,12 +2,12 @@
 (load-file "~/.emacs.d/org.el")
 
 (require 'evil)
+(require 'magit)
 (require 'company)
 (require 'whitespace)
 (require 'expand-region)
 
 ;; theme and fonts
-(load-theme 'tango-dark)
 (set-frame-font "xos4 Terminus 12" nil t)
 
 ;; disable stuff
@@ -30,7 +30,12 @@
 
  ;; limit line length to 120 chars
  whitespace-line-column 120
- whitespace-style '(face lines-tail)
+ whitespace-style '(trailing face lines-tail)
+
+ ;; ediff mode
+ ediff-highlight-all-diffs 'nil
+ ediff-window-setup-function 'ediff-setup-windows-plain
+ ediff-split-window-function 'split-window-horizontally
 
  company-auto-complete 'company-explicit-action-p
  company-tooltip-align-annotations t
@@ -47,15 +52,18 @@
 
 ;; modes
 (evil-mode t)
+(global-diff-hl-mode)
 (electric-indent-mode 1)
 (projectile-mode)
 (helm-projectile-on)
 (company-mode t)
 
+(add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
+
 ;; Hooks for modes
 (add-hook 'haskell-mode-hook 'intero-mode)
 ; (add-hook 'prog-mode-hook (setq-default show-trailing-whitespace t))
-(add-hook 'prog-mode-hook 'whitespace-mode)
+; (add-hook 'prog-mode-hook 'whitespace-mode)
 
 (add-hook 'rust-mode-hook #'racer-mode)
 (add-hook 'rust-mode-hook 'cargo-minor-mode)
@@ -68,6 +76,10 @@
 (global-unset-key (kbd "C-]"))
 (global-unset-key (kbd "C-s"))
 (global-unset-key (kbd "C-f"))
+(global-unset-key (kbd "C-w"))
+
+;; delete word in minibuffer and other non-evil modes
+(global-set-key (kbd "C-w") 'backward-kill-word)
 
 ;; go to definition for different langs
 (evil-define-key 'normal haskell-mode-map

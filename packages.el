@@ -14,6 +14,10 @@
   (package-install 'use-package))
 (require 'use-package)
 
+(use-package sexy-monochrome-theme
+  :ensure t
+  :pin melpa-stable)
+
 (use-package evil
   :ensure t
   :pin melpa-stable)
@@ -33,6 +37,14 @@
 (use-package helm-projectile
   :ensure t
   :pin melpa)
+
+(use-package magit
+  :ensure t
+  :pin melpa-stable)
+
+(use-package diff-hl
+  :ensure t
+  :pin melpa-stable)
 
 (use-package racket-mode
   :ensure t
