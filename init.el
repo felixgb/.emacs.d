@@ -109,6 +109,8 @@
 
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
 
+(define-key evil-normal-state-map (kbd "C-c C-v") 'magit-status)
+
 ;; search through open buffers
 (define-key evil-normal-state-map (kbd "M-p") 'helm-buffer-list)
 
