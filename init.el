@@ -44,6 +44,9 @@
  racer-cmd "~/.cargo/bin/racer"
  racer-rust-src-path "~/.local/src/rust/src")
 
+(setq hippie-expand-try-functions-list '(try-expand-line
+                                         try-expand-line-all-buffers))
+
 ;; buffer local variables
 (setq-default
  indent-tabs-mode nil
@@ -98,14 +101,14 @@
     (kbd "C-l") 'comint-clear-buffer)
 
 (with-eval-after-load 'company
-  (define-key company-active-map (kbd "M-n") nil)
-  (define-key company-active-map (kbd "M-p") nil))
+  (define-key company-active-map (kbd "C-n") #'company-select-next)
+  (define-key company-active-map (kbd "C-p") #'company-select-previous))
 
 ;; keybindings
 (define-key evil-normal-state-map (kbd "C-s") 'er/expand-region)
 (define-key evil-insert-state-map (kbd "C-x C-o") 'company-complete)
 (define-key evil-insert-state-map (kbd "C-x C-f") 'company-files)
-(define-key evil-insert-state-map (kbd "C-x C-l") 'evil-complete-next-line)
+(define-key evil-insert-state-map (kbd "C-x C-l") 'hippie-expand)
 
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
 
