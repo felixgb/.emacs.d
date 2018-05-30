@@ -66,7 +66,7 @@
 (electric-indent-mode 1)
 (projectile-mode)
 (helm-projectile-on)
-(company-mode t)
+(global-company-mode +1)
 
 ;; Hooks for modes
 (add-hook 'haskell-mode-hook 'intero-mode)
@@ -116,7 +116,7 @@
 
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
 
-(define-key evil-normal-state-map (kbd "C-c C-v") 'magit-status)
+(define-key evil-normal-state-map (kbd "C-c C-c C-v") 'magit-status)
 
 ;; search through open buffers
 (define-key evil-normal-state-map (kbd "C-c b") 'helm-mini)
