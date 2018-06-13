@@ -11,8 +11,5 @@
  '(("t" "Personal Todo" entry (file+headline "~/me/felix.org" "PERSONAL THINGS")
     "* TODO %?")
 
-   ("w" "Work todo" entry (file+headline "~/me/felix.org" "WORK THINGS")
-    "* TODO %?")
-
-   ("p" "Projects" entry (file+headline "~/me/work.org" "PROJECTS")
-    "* TODO %? %^g\n%a")))
+   ("w" "Food shopping!!!" item (file+olp+datetree "~/me/shopping.org" "Shopping" :tree-type week)
+    "- %?")))

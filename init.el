@@ -11,7 +11,7 @@
 (require 'ensime-expand-region)
 
 ;; theme and fonts
-(set-frame-font "xos4 Terminus 12" nil t)
+(set-frame-font "xos4 Terminus 9" nil t)
 
 (custom-set-faces
  '(whitespace-line ((t (:background "black" :foreground "firebrick"))))
@@ -116,14 +116,15 @@
 
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
 
-(define-key evil-normal-state-map (kbd "C-c C-c C-v") 'magit-status)
+(define-key evil-normal-state-map (kbd "<f8>") 'magit-status)
 
 ;; search through open buffers
 (define-key evil-normal-state-map (kbd "C-c b") 'helm-mini)
 
 (define-key evil-normal-state-map (kbd "C-c i") 'ensime-import-type-at-point)
+(define-key evil-normal-state-map (kbd "C-c u") 'ensime-show-uses-of-symbol-at-point)
 (define-key evil-normal-state-map (kbd "C-c s") 'sbt-command)
-(define-key evil-normal-state-map (kbd "C-c C-c s") 'sbt-run-previous-command)
+(define-key evil-normal-state-map (kbd "C-c a") 'sbt-run-previous-command)
 (define-key evil-normal-state-map (kbd "C-f") 'helm-ag-project-root)
 (define-key evil-visual-state-map (kbd "C-f") 'helm-ag-project-root)
 
@@ -139,4 +140,6 @@
 
 (define-key evil-normal-state-map (kbd "C-c -")
   (lambda () (interactive)
-    (set-frame-font "xos4 Terminus 12" nil t)))
+    (set-frame-font "xos4 Terminus 9" nil t)))
+
+(define-key evil-normal-state-map (kbd "C-c o") 'org-capture)
