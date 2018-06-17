@@ -120,7 +120,21 @@
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
 
 (define-key evil-normal-state-map (kbd "<f8>") 'magit-status)
-(define-key evil-normal-state-map (kbd "<f9>") 'neotree-toggle)
+
+(defun neotree-project-dir ()
+  "Open NeoTree using the git root."
+  (interactive)
+  (let ((project-dir (projectile-project-root))
+        (file-name (buffer-file-name)))
+    (neotree-toggle)
+    (if project-dir
+        (if (neo-global--window-exists-p)
+            (progn
+              (neotree-dir project-dir)
+              (neotree-find file-name)))
+      (message "Could not find git project root."))))
+
+(define-key evil-normal-state-map (kbd "<f9>") 'neotree-project-dir)
 
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
 (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
