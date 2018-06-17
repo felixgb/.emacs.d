@@ -17,7 +17,7 @@
 (use-package doom-themes
   :ensure t
   :preface (defvar region-fg "")
-  :init (load-theme 'doom-peacock t))
+  :init (load-theme 'doom-city-lights t))
 
 (use-package neotree
   :ensure t)

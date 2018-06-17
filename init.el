@@ -159,10 +159,10 @@
 
 (define-key evil-normal-state-map (kbd "C-c =")
   (lambda () (interactive)
-    (set-frame-font "xos4 Terminus 22" nil t)))
+    (set-frame-font "Hack 22" nil t)))
 
 (define-key evil-normal-state-map (kbd "C-c -")
   (lambda () (interactive)
-    (set-frame-font "xos4 Terminus 12" nil t)))
+    (set-frame-font "Hack 12" nil t)))
 
 (define-key evil-normal-state-map (kbd "C-c o") 'org-capture)
