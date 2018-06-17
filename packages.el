@@ -14,10 +14,22 @@
   (package-install 'use-package))
 (require 'use-package)
 
-(use-package sexy-monochrome-theme
+(use-package doom-themes
   :ensure t
-  :pin melpa-stable)
+  :preface (defvar region-fg "")
+  :init (load-theme 'doom-peacock t))
 
+(use-package neotree
+  :ensure t)
+
+(use-package solaire-mode
+  :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
+  :config
+  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
+
+(use-package solaire-mode
+  :ensure t
+  :config (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 (use-package evil
   :ensure t
   :pin melpa-stable)

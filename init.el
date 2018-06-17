@@ -11,7 +11,7 @@
 (require 'ensime-expand-region)
 
 ;; theme and fonts
-(set-frame-font "xos4 Terminus 9" nil t)
+(set-frame-font "Hack" nil t)
 
 (custom-set-faces
  '(whitespace-line ((t (:background "black" :foreground "firebrick"))))
@@ -100,6 +100,9 @@
 (evil-define-key 'normal scala-mode-map
     (kbd "C-]") 'ensime-edit-definition)
 
+(evil-define-key 'normal rust-mode-map
+    (kbd "C-]") 'racer-find-definition)
+
 ;; C-l clear sbt shell
 (evil-define-key 'normal sbt-mode-map
     (kbd "C-l") 'comint-clear-buffer)
@@ -117,6 +120,12 @@
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
 
 (define-key evil-normal-state-map (kbd "<f8>") 'magit-status)
+(define-key evil-normal-state-map (kbd "<f9>") 'neotree-toggle)
+
+(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
+(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
+(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 ;; search through open buffers
 (define-key evil-normal-state-map (kbd "C-c b") 'helm-mini)
@@ -140,6 +149,6 @@
 
 (define-key evil-normal-state-map (kbd "C-c -")
   (lambda () (interactive)
-    (set-frame-font "xos4 Terminus 9" nil t)))
+    (set-frame-font "xos4 Terminus 12" nil t)))
 
 (define-key evil-normal-state-map (kbd "C-c o") 'org-capture)
