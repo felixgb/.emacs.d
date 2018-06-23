@@ -17,7 +17,7 @@
 (use-package doom-themes
   :ensure t
   :preface (defvar region-fg "")
-  :init (load-theme 'doom-city-lights t))
+  :init (load-theme 'doom-peacock t))
 
 (use-package neotree
   :ensure t)
@@ -25,7 +25,8 @@
 (use-package solaire-mode
   :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
   :config
-  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
+  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
+  (solaire-mode-swap-bg))
 
 (use-package solaire-mode
   :ensure t
@@ -92,6 +93,15 @@
 (use-package flycheck-rust
   :ensure t
   :pin melpa)
+
+(use-package popup-imenu
+  :ensure t
+  :pin melpa)
+
+(use-package geiser
+  :ensure t
+  :pin melpa
+  :config (setq geiser-active-implementations '(racket)))
 
 (use-package markdown-mode
   :ensure t

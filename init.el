@@ -11,7 +11,7 @@
 (require 'ensime-expand-region)
 
 ;; theme and fonts
-(set-frame-font "Hack" nil t)
+(set-frame-font "Hack 10" nil t)
 
 (custom-set-faces
  '(whitespace-line ((t (:background "black" :foreground "firebrick"))))
@@ -31,6 +31,8 @@
  scroll-error-top-bottom t
  show-paren-delay 0.5
 
+ neo-window-fixed-size -1
+
  ;; helm ag
  grep-find-ignored-directories '("target")
  helm-ag-use-grep-ignore-list t
@@ -46,6 +48,8 @@
 
  company-auto-complete 'company-explicit-action-p
  company-tooltip-align-annotations t
+
+ ensime-sem-high-enabled-p nil
 
  racer-cmd "~/.cargo/bin/racer"
  racer-rust-src-path "~/.local/src/rust/src")
@@ -157,12 +161,33 @@
 (define-key evil-normal-state-map (kbd "M-n") 'diff-hl-next-hunk)
 (define-key evil-normal-state-map (kbd "M-p") 'diff-hl-previous-hunk)
 
+(define-key evil-normal-state-map (kbd "C-l") 'popup-imenu)
+
 (define-key evil-normal-state-map (kbd "C-c =")
   (lambda () (interactive)
     (set-frame-font "Hack 22" nil t)))
 
 (define-key evil-normal-state-map (kbd "C-c -")
   (lambda () (interactive)
-    (set-frame-font "Hack 12" nil t)))
+    (set-frame-font "Hack" nil t)))
 
 (define-key evil-normal-state-map (kbd "C-c o") 'org-capture)
+
+;; esc quits
+(defun minibuffer-keyboard-quit ()
+  "Abort recursive edit.
+In Delete Selection mode, if the mark is active, just deactivate it;
+then it takes a second \\[keyboard-quit] to abort the minibuffer."
+  (interactive)
+  (if (and delete-selection-mode transient-mark-mode mark-active)
+      (setq deactivate-mark  t)
+    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
+    (abort-recursive-edit)))
+(define-key evil-normal-state-map [escape] 'keyboard-quit)
+(define-key evil-visual-state-map [escape] 'keyboard-quit)
+(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+(global-set-key [escape] 'evil-exit-emacs-state)
