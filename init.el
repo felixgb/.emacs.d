@@ -11,7 +11,7 @@
 (require 'ensime-expand-region)
 
 ;; theme and fonts
-(set-frame-font "Hack 10" nil t)
+(set-frame-font "xos4 Terminus 12" nil t)
 
 (custom-set-faces
  '(whitespace-line ((t (:background "black" :foreground "firebrick"))))
@@ -30,8 +30,6 @@
  make-backup-files nil
  scroll-error-top-bottom t
  show-paren-delay 0.5
-
- neo-window-fixed-size -1
 
  ;; helm ag
  grep-find-ignored-directories '("target")
@@ -57,7 +55,6 @@
 (setq hippie-expand-try-functions-list '(try-expand-line
                                          try-expand-line-all-buffers))
 
-;; buffer local variables
 (setq-default
  indent-tabs-mode nil
  tab-width 8
@@ -66,7 +63,6 @@
 
 ;; modes
 (evil-mode t)
-(global-diff-hl-mode)
 (electric-indent-mode 1)
 (projectile-mode)
 (helm-projectile-on)
@@ -96,20 +92,20 @@
 
 ;; go to definition for different langs
 (evil-define-key 'normal haskell-mode-map
-    (kbd "C-]") 'intero-goto-definition)
+  (kbd "C-]") 'intero-goto-definition)
 
 (evil-define-key 'normal racket-mode-map
-    (kbd "C-]") 'racket-visit-definition)
+  (kbd "C-]") 'racket-visit-definition)
 
 (evil-define-key 'normal scala-mode-map
-    (kbd "C-]") 'ensime-edit-definition)
+  (kbd "C-]") 'ensime-edit-definition)
 
 (evil-define-key 'normal rust-mode-map
-    (kbd "C-]") 'racer-find-definition)
+  (kbd "C-]") 'racer-find-definition)
 
 ;; C-l clear sbt shell
 (evil-define-key 'normal sbt-mode-map
-    (kbd "C-l") 'comint-clear-buffer)
+  (kbd "C-l") 'comint-clear-buffer)
 
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "C-n") #'company-select-next)
@@ -122,28 +118,6 @@
 (define-key evil-insert-state-map (kbd "C-x C-l") 'hippie-expand)
 
 (define-key evil-normal-state-map (kbd "C-p") 'helm-projectile-find-file)
-
-(define-key evil-normal-state-map (kbd "<f8>") 'magit-status)
-
-(defun neotree-project-dir ()
-  "Open NeoTree using the git root."
-  (interactive)
-  (let ((project-dir (projectile-project-root))
-        (file-name (buffer-file-name)))
-    (neotree-toggle)
-    (if project-dir
-        (if (neo-global--window-exists-p)
-            (progn
-              (neotree-dir project-dir)
-              (neotree-find file-name)))
-      (message "Could not find git project root."))))
-
-(define-key evil-normal-state-map (kbd "<f9>") 'neotree-project-dir)
-
-(evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
-(evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-quick-look)
-(evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide)
-(evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
 
 ;; search through open buffers
 (define-key evil-normal-state-map (kbd "C-c b") 'helm-mini)
@@ -161,33 +135,12 @@
 (define-key evil-normal-state-map (kbd "M-n") 'diff-hl-next-hunk)
 (define-key evil-normal-state-map (kbd "M-p") 'diff-hl-previous-hunk)
 
-(define-key evil-normal-state-map (kbd "C-l") 'popup-imenu)
+(define-key evil-normal-state-map (kbd "C-c o") 'org-capture)
 
 (define-key evil-normal-state-map (kbd "C-c =")
   (lambda () (interactive)
-    (set-frame-font "Hack 22" nil t)))
+    (set-frame-font "Hack 12" nil t)))
 
-(define-key evil-normal-state-map (kbd "C-c -")
+(define-key evil-normal-state-map (kbd "C-c +")
   (lambda () (interactive)
-    (set-frame-font "Hack" nil t)))
-
-(define-key evil-normal-state-map (kbd "C-c o") 'org-capture)
-
-;; esc quits
-(defun minibuffer-keyboard-quit ()
-  "Abort recursive edit.
-In Delete Selection mode, if the mark is active, just deactivate it;
-then it takes a second \\[keyboard-quit] to abort the minibuffer."
-  (interactive)
-  (if (and delete-selection-mode transient-mark-mode mark-active)
-      (setq deactivate-mark  t)
-    (when (get-buffer "*Completions*") (delete-windows-on "*Completions*"))
-    (abort-recursive-edit)))
-(define-key evil-normal-state-map [escape] 'keyboard-quit)
-(define-key evil-visual-state-map [escape] 'keyboard-quit)
-(define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-(define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
-(global-set-key [escape] 'evil-exit-emacs-state)
+    (set-frame-font "Hack 14" nil t)))

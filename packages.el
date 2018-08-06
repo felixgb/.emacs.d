@@ -16,21 +16,8 @@
 
 (use-package doom-themes
   :ensure t
-  :preface (defvar region-fg "")
-  :init (load-theme 'doom-peacock t))
+  :preface (defvar region-fg ""))
 
-(use-package neotree
-  :ensure t)
-
-(use-package solaire-mode
-  :hook ((change-major-mode after-revert ediff-prepare-buffer) . turn-on-solaire-mode)
-  :config
-  (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer)
-  (solaire-mode-swap-bg))
-
-(use-package solaire-mode
-  :ensure t
-  :config (add-hook 'minibuffer-setup-hook #'solaire-mode-in-minibuffer))
 (use-package evil
   :ensure t
   :pin melpa-stable)
@@ -38,6 +25,33 @@
 (use-package expand-region
   :ensure t
   :pin melpa-stable)
+
+(use-package creamsody-theme
+  :ensure t
+  :pin melpa-stable
+  :init
+  (load-theme 'creamsody t)
+  (creamsody-modeline-three))
+
+(use-package helm
+  :ensure t
+  :pin melpa
+  :config
+  (setq helm-follow-mode-persistent t
+        helm-split-window-default-side 'right)
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-c C-f") #'helm-find-files)
+  (global-set-key (kbd "C-l") #'helm-semantic-or-imenu))
+
+(use-package helm
+  :ensure t
+  :pin melpa
+  :config
+  (setq helm-follow-mode-persistent t
+        helm-split-window-default-side 'right)
+  (global-set-key (kbd "M-x") #'helm-M-x)
+  (global-set-key (kbd "C-c C-f") #'helm-find-files)
+  (global-set-key (kbd "C-l") #'helm-semantic-or-imenu))
 
 (use-package helm-ag
   :ensure t
@@ -58,14 +72,6 @@
 (use-package evil-magit
   :ensure t
   :pin melpa-stable)
-
-(use-package diff-hl
-  :ensure t
-  :pin melpa-stable)
-
-(use-package racket-mode
-  :ensure t
-  :pin melpa)
 
 ;; haskell
 (use-package haskell-mode
@@ -94,10 +100,6 @@
   :ensure t
   :pin melpa)
 
-(use-package popup-imenu
-  :ensure t
-  :pin melpa)
-
 (use-package geiser
   :ensure t
   :pin melpa
@@ -109,4 +111,5 @@
   :mode (("README\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "pandoc -f gfm")
   :pin melpa-stable)
